@@ -1,0 +1,32 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{lipsum}
+\usepackage[perpage]{footmisc}   % same as 001 but with footmisc
+
+\newcommand\sample{A sample paragraph\footnote{A footnote} with
+four\footnote{A second} footnotes two of which are coming\footnote{A
+third} up now.\footnote{Final} And some more text.\par}
+
+\newcommand\sampleii{A short text\footnote{\lipsum[2] A par command at
+the end of a footnote results in an extra line (bug?)} with a very
+long footnote.}
+
+\newcommand\sampleiii{Two footnotes\footnote{A}\footnote{B} in succession.}
+
+\setlength\textheight{12\baselineskip}
+
+\showoutput
+
+\begin{document}
+
+\START
+
+\sample
+\sampleii \lipsum[1]
+\sampleiii
+
+\newpage
+
+\END

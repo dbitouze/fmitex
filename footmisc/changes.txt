@@ -1,0 +1,16 @@
+2018-09-09  Frank Mittelbach  <Frank.Mittelbach@latex-project.org>
+
+	* footmisc.dtx
+	(section{User interface~--- interactions with other packages}):
+	hyperref should now work in either order of loading
+
+	(section{Code: Preliminaries}): dropped checking for etex (must be there)
+
+	(subsection{The other footnote commands}\label{sec:perpage-code}):
+	perpage option delegated to external package (perpage)
+
+	abovefloats and belowfloats options added
+
+
+
+

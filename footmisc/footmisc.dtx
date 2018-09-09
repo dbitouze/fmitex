@@ -878,7 +878,7 @@
 %
    \setbox\@outputbox \box\@cclv
 %
-   \@makecol@appendto 
+   \@makecol@appendblocks 
 %
    \ifvbox\@kludgeins
      \@makespecialcolbox
@@ -899,7 +899,7 @@
 %    \cs{@makecol} support macros:
 %    \begin{macrocode}
 %---------------------------------------------------------
-\def\@makecol@append #1{%
+\def\@makecol@appendstuff #1{%
      \setbox\@outputbox \vbox {%
        \boxmaxdepth \@maxdepth
        \unvbox \@outputbox                  % changed
@@ -914,7 +914,7 @@
 %     
      \@makecol@preparefootinshook
 %     
-     \@makecol@append{%
+     \@makecol@appendstuff{%
 %
        #1%                                  %% \vfill or \@makecol@moveskip
 %
@@ -1004,13 +1004,13 @@
   \ifFN@abovefloats
 %---------------------------------------------------------
     % footnotes bottom above floats
-    \def\@makecol@appendto {%
+    \def\@makecol@appendblocks {%
        \@makecol@appendfootnotes {\vfill}%
        \@makecol@appendfloats}
   \else
 %---------------------------------------------------------
     % footnotes bottom below floats
-    \def\@makecol@appendto {%
+    \def\@makecol@appendblocks {%
        \@makecol@appendfloats
        \@makecol@appendfootnotes {\vfill}}
   \fi
@@ -1018,7 +1018,7 @@
   \ifFN@abovefloats
 %---------------------------------------------------------
     %default setup, so this is a repeat from above really
-    \def\@makecol@appendto {%
+    \def\@makecol@appendblocks {%
        \@makecol@appendfootnotes {\@makecol@moveskip}%
        \@makecol@appendfloats}
   \else
@@ -1026,7 +1026,7 @@
     % footnotes below floats close to text
     %
     % with the current topion interface this case can't be reached
-    \def\@makecol@appendto {%
+    \def\@makecol@appendblocks {%
        \@makecol@appendfloats
        \@makecol@appendfootnotes {\@makecol@moveskip}}
 %---------------------------------------------------------
@@ -1036,8 +1036,8 @@
 %    Here is another code example 
 %    \begin{macrocode}
     % footnotes bottom below floats but floats moved partly down too
-%    \def\@makecol@appendto {%
-%       \@makecol@append          {\vskip 0pt plus.5fill}%
+%    \def\@makecol@appendblocks {%
+%       \@makecol@appendstuff          {\vskip 0pt plus.5fill}%
 %       \@makecol@appendfloats
 %       \@makecol@appendfootnotes {\vfill}}
 %    \end{macrocode}

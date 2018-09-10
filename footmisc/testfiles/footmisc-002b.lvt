@@ -3,9 +3,7 @@
 \input{regression-test}
 
 \usepackage{lipsum}
-\usepackage[perpage,symbol*,moveskip]{footmisc}   % same as 001 but with footmisc
-
-
+\usepackage[moveskip]{footmisc}   % same as 001 but with footmisc
 
 \newcommand\sample{A sample paragraph\footnote{A footnote} with
 four\footnote{A second} footnotes two of which are coming\footnote{A
@@ -17,7 +15,7 @@ long footnote.}
 
 \newcommand\sampleiii{Two footnotes\footnote{A}\footnote{B} in succession.}
 
-\setlength\textheight{24\baselineskip}
+\setlength\textheight{12\baselineskip}
 
 \showoutput
 
@@ -25,8 +23,10 @@ long footnote.}
 
 \START
 
-\sample\sample\sample\sampleiii \sampleiii \sampleiii                 % too many footnotes
-\sampleii \sampleiii \sampleiii \sampleiii \sampleiii
+\sample
+\sampleii \lipsum[1]
+\sampleiii
 
-\end{document}
+\newpage
 
+\END

@@ -31,7 +31,7 @@
 %</dtx>
 %<package>\ProvidesPackage{footmisc}%
 %<*!debugins>
-        [2011/06/06 v5.5b
+        [2018/09/10 v6.0-alpha
 %</!debugins>
 %<package>     a miscellany of footnote facilities (with updates 2018)%
 %<*dtx>
@@ -308,6 +308,30 @@
 % the bottom of pages: if a bottom float appears on a page, \LaTeX{}
 % places the footnote \emph{above} it.  The \texttt{bottom} option
 % places the footnote at the foot of the page.
+%
+%
+% \subsection{Option \texttt{moveskip}}
+%
+% When the \texttt{bottom} option is not in force (i.e., in the
+% default case) there is a strange discrepancy: on most pages the
+% footnotes are attached a distance of \cs{skip}\cs{footins} from the
+% main text, even if that is run short. However, whenever the is some
+% infinite stretch on the page, e.g., from using \cs{newpage} or
+% \cs{clearpage} the footnotes are pushed to the bottom (in particular
+% on the last page of a document or chapter).
+%
+% This can be corrected by giving the option \texttt{moveskip} in
+% which infinite glue just before the footnotes is removed and placed
+% after them.
+%
+% This has the following effects: if \cs{raggedbottom} is in force,
+% then the footnotes will always stay the same distance from main
+% text and the bottom of the text may vary from page to page.
+% However, if \cs{flushbottom} is force, e.g. in the \texttt{book}
+% class, then the footnotes will only move if there is infinite glue
+% directly at the bottom of the page. Only then, the footnotes will
+% shift upwards.
+%
 %
 % \subsection{Options \texttt{abovefloats} and \texttt{belowfloats}}
 %
@@ -701,16 +725,20 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{The \texttt{bottom} option}
+% \subsection{The \texttt{bottom} and \texttt{moveskip} option}
 %
 % \begin{macro}{\ifFN@bottom}
 % All this needs to do is to set a flag to say that it should happen. Historically
 % this also
 % moves the footnotes below the bottom floats.
 %    \begin{macrocode}
-\newif\ifFN@bottom  \FN@bottomfalse
+\newif\ifFN@bottom        \FN@bottomfalse
 \DeclareOption{bottom}{%
   \FN@bottomtrue\FN@abovefloatsfalse
+}
+\newif\ifFN@moveskip      \FN@moveskipfalse
+\DeclareOption{moveskip}{%
+  \FN@moveskiptrue
 }
 %    \end{macrocode}
 % \end{macro}
@@ -946,17 +974,33 @@
 }
 %\def\splitfootnote@continuation{}
 %---------------------------------------------------------
-\def\@makecol@moveskip{%
-  \ifx\@textbottom\relax
-    \let\@makecol@bottomskip\relax
-  \else
-    \@tempskipa\lastskip
-    \ifnum \gluestretchorder\@tempskipa>\z@
-      \vskip-\@tempskipa
-      \edef\@makecol@bottomskip{\vskip\the\@tempskipa}%
+%    \end{macrocode}
+%    This is really a bug fix for the kernel, but perhaps one has to
+%    make it optional because it is in there since day one). If
+%    \cs{raggedbottom} is in force, footnotes get attached to the main
+%    galley at a distance of \cs{footskip} on all pages except on
+%    those that are ended by \cs{newpage} or \cs{clearpage} where the
+%    resulting \cs{vfill} pushes the footnotes to the very bottom.
+%
+%    This is kind of a weird difference to ending a page with
+%    \cs{pagebreak} in that case---in that case the page is also run
+%    short, but the footnote is not pushed to the bottom.
+%    \begin{macrocode}
+\ifFN@moveskip
+  \def\@makecol@moveskip{%
+    \ifx\@textbottom\relax
+      \let\@makecol@bottomskip\relax
+    \else
+      \@tempskipa\lastskip
+      \ifnum \gluestretchorder\@tempskipa>\z@
+        \vskip-\@tempskipa
+        \edef\@makecol@bottomskip{\vskip\the\@tempskipa}%
+      \fi
     \fi
-  \fi
-}         
+  }
+\else  
+  \let\@makecol@moveskip \relax
+\fi
 %---------------------------------------------------------
 \def \@makecol@appendfloats{%
    \let\@elt\relax

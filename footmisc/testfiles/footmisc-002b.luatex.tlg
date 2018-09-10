@@ -2169,7 +2169,7 @@ Completed box being shipped out [3]
 ...\hbox(0.0+0.0)x345.0, direction TLT
 ..\glue 25.0
 ..\glue(\lineskip) 0.0
-..\vbox(144.0+0.0)x345.0, glue set 96.447fil, direction TLT
+..\vbox(144.0+0.0)x345.0, glue set 93.59729fil, direction TLT
 ...\glue(\topskip) 3.06
 ...\hbox(6.94+2.06)x345.0, glue set 144.81999fil, direction TLT
 ....\TU/lmr/m/n/10 D
@@ -2290,6 +2290,7 @@ Completed box being shipped out [3]
 ....\glue(\rightskip) 0.0
 ...\glue -0.11
 ...\glue 0.0 plus 1.0fil
+...\glue 0.0 plus -1.0fil
 ...\glue 9.0 plus 4.0 minus 2.0
 ...\kern-3.0
 ...\rule(0.4+0.0)x137.9979
@@ -2338,7 +2339,8 @@ Completed box being shipped out [3]
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
-...\glue -2.85002
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
 ...\glue 0.0 plus 0.0001fil
 ..\glue(\baselineskip) 23.34
 ..\hbox(6.66+0.22)x345.0, glue set 170.0fil, direction TLT

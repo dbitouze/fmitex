@@ -3,7 +3,7 @@
 \input{regression-test}
 
 \usepackage{lipsum}
-\usepackage[perpage]{footmisc}   % same as 001 but with footmisc
+\usepackage[perpage,moveskip]{footmisc}   % same as 001 but with footmisc
 
 \newcommand\sample{A sample paragraph\footnote{A footnote} with
 four\footnote{A second} footnotes two of which are coming\footnote{A

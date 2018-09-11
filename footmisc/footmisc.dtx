@@ -728,6 +728,7 @@
 % \subsection{The \texttt{bottom} and \texttt{moveskip} option}
 %
 % \begin{macro}{\ifFN@bottom}
+% \begin{macro}{\ifFN@moveskip}
 % All this needs to do is to set a flag to say that it should happen. Historically
 % this also
 % moves the footnotes below the bottom floats.
@@ -736,11 +737,17 @@
 \DeclareOption{bottom}{%
   \FN@bottomtrue\FN@abovefloatsfalse
 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ifFN@moveskip}
+%    \begin{macrocode}
 \newif\ifFN@moveskip      \FN@moveskipfalse
 \DeclareOption{moveskip}{%
   \FN@moveskiptrue
 }
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 %

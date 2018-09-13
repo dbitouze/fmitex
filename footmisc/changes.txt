@@ -1,3 +1,8 @@
+2018-09-13  Frank Mittelbach  <Frank.Mittelbach@latex-project.org>
+
+	* footmisc.dtx (subsection{Support code for paragraph footnotes}):
+	Fix bug that para footnotes do not work inside multicols (sx/339039)
+
 2018-09-10  Frank Mittelbach  <Frank.Mittelbach@latex-project.org>
 
 	* footmisc.dtx (subsection{The \texttt{bottom} and \texttt{moveskip} option}):

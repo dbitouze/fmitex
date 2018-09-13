@@ -31,14 +31,14 @@
 %</dtx>
 %<package>\ProvidesPackage{footmisc}%
 %<*!debugins>
-        [2018/09/10 v6.0-alpha
+        [2018/09/13 v6.0-alpha
 %</!debugins>
 %<package>     a miscellany of footnote facilities (with updates 2018)%
 %<*dtx>
                footmisc package source file%
 %</dtx>
 %<*!debugins>
-                   ]% $Id: footmisc.dtx,v 4.25 2011/06/06 14:25:44 rf10 Exp rf10 $
+                   ]
 %</!debugins>
 %    \end{macrocode}
 %
@@ -1316,15 +1316,16 @@
 % \end{macro}
 %
 %
+ 
 % \begin{macro}{\makefootnoteparagraph}
 % For use in the output routine
 %    \begin{macrocode}
   \long\def\makefootnoteparagraph{\unvbox\footins \makehboxofhboxes
-    \setbox\FN@tempboxa=\hbox{\unhbox\FN@tempboxa \removehboxes}
+    \setbox\FN@tempboxa=\hbox{\unhbox\FN@tempboxa \removehboxes}%
 %    \end{macrocode}
 % Now we are ready to set the paragraph:
 %    \begin{macrocode}
-    \hsize\columnwidth
+    \FN@setfootnoteparawidth
     \@parboxrestore
     \baselineskip=\footnotebaselineskip
     \noindent
@@ -1355,6 +1356,34 @@
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
+%
+%
+%
+%
+%
+%  \begin{macro}{\FN@setfootnoteparawidth}
+%    What we have to use as the width for the footnote paragraph
+%   depends on whether or not we typeset in several columns. If single
+%   column or normal two-column is used then the right value is
+%   \cs{columnwidth}. However, inside a \texttt{multicols} environment
+%   we need to use \cs{textwidth} as the footnotes there will span
+%   across all columns.
+%
+%   To detect if we are inside such an environment we look at
+%   \cs{doublecolnumber} which is only positive if inside such an
+%   environment.
+%    \begin{macrocode}
+\@ifpackageloaded{multicol}
+  {\def\FN@setfootnoteparawidth
+    {\hsize\ifnum\doublecol@number>\@ne
+                  \textwidth
+            \else \columnwidth \fi}}
+  {\def\FN@setfootnoteparawidth{\hsize\columnwidth}}
+%    \end{macrocode}
+%  \end{macro}
+%
+%
+%
 %
 %
 % \subsection{The other footnote commands}\label{sec:perpage-code}
